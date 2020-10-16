@@ -36,8 +36,19 @@ let sum = function (array) {
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
-var arraySum = function(array) {
+
+
+var arraySum = function (array) {
+    if (array.length === 0) {
+        return 0;
+    }
+    let arr = array.flat().flat();
+
+    return arr[0] + arraySum(arr.slice(1))
 };
+
+arraySum([1, [2, 3], [[4]], 5]);
+
 
 // 4. Check if a number is even.
 // var isEven = function(n) {
@@ -84,13 +95,36 @@ isEven(5)
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var sumBelow = function(n) {
-};
+
+function sumBelow(n) {
+  if(n === 1) {
+    return 0;
+  } else {
+    return n-1 + sumBelow(n - 1);
+  }
+  
+}
+sumBelow(5);
 
 // 6. Get the integers within a range (x, y).
 // range(2,9); // [3,4,5,6,7,8]
-var range = function(x, y) {
+
+let range = function(start_num, end_num) 
+{
+  if (end_num - start_num === 2) 
+  {
+    return [start_num + 1];
+  } 
+  else 
+  {
+    let list = range(start_num, end_num - 1);
+    list.push(end_num - 1);
+    return list;
+  }
 };
+
+console.log(range(2,9));
+
 
 // 7. Compute the exponent of a number.
 // The exponent of a number says how many times the base number is used as a factor.
@@ -99,6 +133,19 @@ var range = function(x, y) {
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
 };
+var exponent = function(a, n) 
+{
+   if (n === 0) 
+   {
+    return 1;
+    }
+  else 
+  {
+    return a * exponent(a, n-1);
+  }
+};
+
+console.log(exponent(4, 2));
 
 // 8. Determine if a number is a power of two.
 // powerOfTwo(1); // true
